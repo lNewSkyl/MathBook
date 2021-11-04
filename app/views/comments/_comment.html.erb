@@ -1,0 +1,13 @@
+
+<hr />
+<%= comment.content %>
+<small><p class=text-muted>By:&nbsp;<%=  comment.commenter %>&ensp;<%= time_ago_in_words(comment.updated_at) %> ago.</p></small>
+  <p>
+    <% if user_signed_in? %>
+        <% if current_user.email == "atom-1121@mail.ru" %>
+          <a class="link-danger" <%= link_to 'Destroy Comment', [comment.article, comment],
+                method: :delete,
+                data: { confirm: "Are you sure?" } %></a>
+        <% end %>
+    <% end %>
+  </p>

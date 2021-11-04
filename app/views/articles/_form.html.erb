@@ -1,0 +1,85 @@
+<%= form_with model: article do |form| %>
+<div class="card">
+  <div class="card-header">
+    <br>
+    <div align="center">
+      <label class="btn btn-primary", align="center">
+        Choose task avatar
+        <span style="display:none;">
+        <%= form.file_field :avatar, accept: 'image/png,image/jpeg,image/jpg'%></button>
+        </span>
+      </label>  
+      <br><br>
+    <% if article.avatar.attached?%>
+      <p><%= image_tag @article.avatar, width:"100px" %></p>
+      <p><%= link_to "Delete avatar", purge_avatar_article_path(@article), method: :delete, class:"btn btn-danger btn-sm"%></p>
+    <% end %>
+    <br/>
+      <div class="row">
+        <div class="col">
+          <div class="mb-3">
+            <h5><%= form.label :title %></h5>
+            <%= form.text_field :title, class:"form-control",placeholder: "Enter the name of your task"%>
+            <% article.errors.full_messages_for(:title).each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <h5><%= form.label :tags %></h5>
+            <%= form.text_field :description, class:"form-control",placeholder: "Enter the task tags"%>
+            <% article.errors.full_messages_for(:description).each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+  <div class="card-body"><br>
+    <div class="mb-3">
+      <%= form.rich_text_area :body, class:"form-control",placeholder: "Enter the condition of your wonderful task. Also you can add some images to your task condition. ", rows:"7" %>
+      <% article.errors.full_messages_for(:body).each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    </div>
+    <br>
+    <div align="center">
+      <label class="btn btn-outline-primary">
+        Chose images for your task (if you want).
+        <span style="display:none;">
+        <%= form.file_field :images, multiple: true, accept: 'image/png,image/jpeg,image/jpg' %></button>
+        </span>
+      </label>
+    </div>
+    <br>
+        <% if article.images.attached?%>
+          <% @article.images.each do |attachment| %>
+            <%= image_tag attachment, width:"100px" %>
+            <%= link_to "Delete attachment", purge_attachment_path(attachment), method: :delete, class:"btn btn-danger btn-sm" %>
+          <% end %>
+        <% end %>
+      <div class="row">
+        <div class="col">
+        </div>
+        <div class="col">
+          <div class="mb-3">
+            <div align="center">
+            <h5><%= form.label :answer %></h5>
+            <%= form.text_field :answer, class:"form-control",placeholder: "Enter the correct answer to your task"%>
+            <% article.errors.full_messages_for(:answer).each do |message| %>
+              <div><%= message %></div>
+            <% end %>
+          </div>
+          </div>
+        </div>
+        <div class="col">
+        </div>
+      </div>
+    </div> 
+<br>
+<%= form.submit class:"btn btn-warning btn-lg" %>
+<% end %>
+<br><br>
+

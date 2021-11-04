@@ -1,0 +1,8 @@
+ <%= solution.content %>
+ <%= solution.user.email %>
+
+
+
+ <a class="link-danger" <%= link_to 'Destroy check', [solution.article, solution],
+                method: :delete,
+                data: { confirm: "Are you sure?" } %></a>

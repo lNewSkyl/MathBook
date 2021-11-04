@@ -1,0 +1,16 @@
+
+  <form class="row g-3" action="<%= article_solutions_path(article) %> " method="post">
+  	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+
+    <div class="col-auto">
+    <h4>Enter your answer:</h4>
+    </div>
+    <div class="col-auto">
+      <input class="form-control" name="solution[content]" placeholder="Your answer">
+    </div>
+    <div class="col">
+      <button type="submit" class="btn btn-primary btn-block mb-3">Check</button>
+    </div>
+  </form>
+
+

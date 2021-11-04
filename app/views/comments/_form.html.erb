@@ -1,0 +1,16 @@
+<% if user_signed_in? %>
+  <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+    <p>
+      <%= form.text_area :content, placeholder:"Say all that you think about it"%>
+    </p>
+    <p>
+      <%= form.submit class:"btn btn-dark btn-sm" %>
+    </p>
+    <p>
+      <% form.label :status %><br>
+      <% form.select :status, ['public', 'private', 'archived'], selected: 'public' %>
+    </p>
+  <% end %>
+<% end %>
+
+

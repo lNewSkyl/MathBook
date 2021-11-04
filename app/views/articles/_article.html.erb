@@ -1,0 +1,27 @@
+    <hr />
+    <div class="card">
+      <div class="card-header">
+        <div class="d-flex position-relative">
+          <div class="object-fit_cover">
+            <% if article.avatar.attached? %>
+            <p><%= image_tag article.avatar, class:"flex-shrink-0 me-3", width:"160px" %></p>
+            <% else %>
+              <%= image_tag ("Logo.png"), class:"flex-shrink-0 me-3", width:"160px"%>
+            <% end %>
+          </div>
+          <div>
+            <div class="truncate-title">
+              <h4 class="mt-0"><%= article.title %></h4>
+            </div>
+            <small class="text-muted"><%= article.description %></small>
+            <div class="truncate-body">
+              <%= article.body %>
+            </div>
+            <p class="timestamp text-muted" >Posted <%= time_ago_in_words(article.created_at) %> ago.></p>
+            <a class="stretched-link"href:<%= link_to "", article %> </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+

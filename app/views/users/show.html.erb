@@ -1,0 +1,37 @@
+<% unless @user.last_sign_in_at.nil? %>
+  <p class=text-muted align="right">Last seen: <%= time_ago_in_words(@user.last_sign_in_at) %> ago.</p>
+<% else %>
+  <p class=text-muted align="right">Last seen: never.</p>
+<% end %>
+
+
+<div style="text-align: center;">
+  <%if @user.avatar.attached? %>
+    <%= image_tag @user.avatar.variant(resize: "100x100!"), class: "rounded-circle" %>
+    <h1><%= @user.username %> </h1></td>
+  <%else%> 
+    <%= image_tag ('default_profile.png'),size: '100x100', class: "rounded-circle" %>
+    <h1><%= @user.username %> </h1></td>
+  <% end %>
+
+  <% if user_signed_in? %>
+    <% if current_user.email == "atom-1121@mail.ru" %>
+      <% if @user.email != "atom-1121@mail.ru" %>
+        <p><a class="btn btn-outline-danger" <%= link_to ban_status(@user), ban_user_path(@user), method: :patch %></a></h1></td>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+
+<% if @user.articles.any? %>
+  <h3>User tasks (<%= @user.articles.count %>)</h3>
+  <br>
+  <div class="flickr_pagination">
+    <%= will_paginate @articles %>
+  </div>
+    <%= render @articles %>
+<div class="flickr_pagination">
+    <%= will_paginate @articles %>
+</div>
+<% end %>

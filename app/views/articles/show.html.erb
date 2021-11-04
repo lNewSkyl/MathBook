@@ -1,0 +1,72 @@
+  <% if user_signed_in? %>
+   <% if @article.user.email == current_user.email || current_user.email == "atom-1121@mail.ru" %>
+      <div class="btn-group container" role="group" aria-label="Basic mixed styles example">
+      <a href="<%= edit_article_path(@article) %>" class="btn btn-outline-success" role="button">Edit task</a>
+      <a class="btn btn-danger" <%= link_to "Delete task", article_path(@article),
+                      method: :delete,
+                      data: { confirm: "Are you sure?" } %></a></div>
+   <% end %>
+  <% end %>  
+<br><br>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <% if @article.avatar.attached? %>
+      <p><%= image_tag @article.avatar, width:"150px" %></p>
+      <% else %>
+      <p><%= image_tag "Logo.png", width:"150px" %></p>
+      <% end %>
+    </div>
+    <div class="col">
+      <div class="truncate-title-show" align="center">
+        <h1><%= @article.title %></h1>
+      </div>
+    </div>
+    <div class="col">
+      <style>.raz {text-align: right;}</style>
+      <div class = raz>
+      <p class=text-muted>Created: <%= time_ago_in_words(@article.created_at) %> ago.<br>by <strong><%= link_to @article.user.username, @article.user %> </strong></p>
+    </div>
+    </div>
+  </div>
+</div>
+<small class="text-muted"><%= @article.description %></small>
+<hr/>
+<p><%= @article.body %></p>
+<p><% if @article.images.attached? %>
+<strong>Images:</strong><p>
+  <% @article.images.each do |image| %>
+  <%= image_tag image, width:"400px" %>
+  <% end %>
+<% end %>
+<% @article.answer %>
+<br>
+<% if user_signed_in? %>
+  <%= render partial: 'solutions/form', locals: { article: @article, user: current_user} %>
+<% end %>
+</p>
+<hr/>
+  <div class="row row-cols-auto">
+    <div class="col">
+      <h3>Task rate: </h3>
+    </div>
+    <div class="col">
+      <%= render "articles/upvote_link", article: @article %>
+    </div>
+    <div class="col">
+      <%= render "articles/votes_score", article: @article %> 
+    </div>
+    <div class="col">
+      <%= render "articles/downvote_link", article: @article %> 
+    </div>
+  </div>
+<br>
+<br/>
+<h2>Comments:</h2>
+<%= render @article.comments %>
+  <% if user_signed_in? %>
+    <%= render 'comments/form' %>
+  <% end %>
+
+
+
