@@ -13,6 +13,9 @@ gem 'devise'
 gem 'faker'
 gem 'will_paginate-bootstrap'
 gem 'acts_as_votable'
+gem 'carrierwave'
+gem 'cloudinary'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
