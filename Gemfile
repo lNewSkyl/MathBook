@@ -15,6 +15,7 @@ gem 'will_paginate-bootstrap'
 gem 'acts_as_votable'
 gem 'carrierwave'
 gem 'cloudinary'
+gem 'azure-storage-blob'
 
 
 
