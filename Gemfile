@@ -7,7 +7,6 @@ gem "omniauth-rails_csrf_protection"
 gem 'omniauth-google-oauth2'
 gem 'bootstrap-sass'
 gem 'gravatar_image_tag'
-gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
 gem 'faker'
@@ -17,6 +16,7 @@ gem 'carrierwave'
 gem 'cloudinary'
 gem 'azure-storage-blob'
 gem 'rspec-rails'
+gem 'aws-sdk'
 
 
 

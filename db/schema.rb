@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_17_225130) do
+ActiveRecord::Schema.define(version: 2021_10_18_151234) do
 
   create_table "action_text_rich_texts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -70,20 +70,18 @@ ActiveRecord::Schema.define(version: 2021_10_17_225130) do
   end
 
   create_table "comments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.string "commenter"
+    t.string "user"
     t.text "body"
+    t.text "content"
     t.bigint "article_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "status"
-    t.text "content", null: false
-    t.bigint "user_id", null: false
     t.index ["article_id"], name: "index_comments_on_article_id"
-    t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "solutions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.text "content"
+    t.text "content", null: false
     t.bigint "article_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -108,6 +106,7 @@ ActiveRecord::Schema.define(version: 2021_10_17_225130) do
     t.integer "failed_attempts", default: 0, null: false
     t.datetime "locked_at"
     t.string "unlock_token"
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true

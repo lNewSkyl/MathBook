@@ -4,8 +4,6 @@ class CommentsController < ApplicationController
   def create
     @article = Article.find(params[:article_id])
     @comment = @article.comments.build(comment_params)
-    @comment.user_id = current_user.id
-    @comment.commenter = current_user.username
     if @comment.content.length >= 1
       @comment.save!
       redirect_to article_path(@article)
@@ -26,7 +24,7 @@ class CommentsController < ApplicationController
 
   private
   def comment_params
-    :user_id=>current_user_id
-    params.require(:comment).permit(:commenter, :content, :user_id)
+    :user=>current_user_email
+    params.require(:comment).permit(:content)
   end
 end
