@@ -6,8 +6,7 @@ class Article < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_rich_text :body
   acts_as_votable
-  has_one_attached :solutions
-
+  has_many :solutions, dependent: :destroy
   
   validates :user_id, presence: true
   validates :title, presence: true
