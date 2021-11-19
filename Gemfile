@@ -12,11 +12,6 @@ gem 'devise'
 gem 'faker'
 gem 'will_paginate-bootstrap'
 gem 'acts_as_votable'
-gem 'carrierwave'
-gem 'cloudinary'
-gem 'azure-storage-blob'
-gem 'rspec-rails'
-gem 'aws-sdk'
 
 
 
@@ -45,7 +40,7 @@ gem 'jbuilder', '~> 2.7'
 
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
-gem 'aws-sdk-s3', require: false
+gem "aws-sdk-s3", require: false
 gem 'active_storage_validations'
 
 
