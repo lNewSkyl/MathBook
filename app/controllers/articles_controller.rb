@@ -13,6 +13,16 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  def complete
+    if user_signed_in?
+      @article = Article.find(params[:id])
+      @article.upvote_by current_user
+      
+      render "vote.js.erb"
+    end
+  end
+    
+
 
   def purge_avatar
     @article = Article.find(params[:id])
@@ -67,10 +77,10 @@ class ArticlesController < ApplicationController
   def downvote
     if user_signed_in?
       @article = Article.find(params[:id])
-      if current_user.voted_down_on? @article
-        @article.unvote_by current_user
+      if current_user.voted_down_on? @article, vote_scope: 'like'
+        @article.unvote_by current_user, vote_scope: 'like'
       else 
-        @article.downvote_by current_user
+        @article.downvote_by current_user, vote_scope: 'like'
       end
       render "vote.js.erb"
     end
@@ -79,10 +89,10 @@ class ArticlesController < ApplicationController
   def upvote
     if user_signed_in?
       @article = Article.find(params[:id])
-      if current_user.voted_up_on? @article
-        @article.unvote_by current_user
+      if current_user.voted_up_on? @article, vote_scope: 'like'
+        @article.unvote_by current_user, vote_scope: 'like'
       else 
-        @article.upvote_by current_user
+        @article.upvote_by current_user, vote_scope: 'like'
       end
       render "vote.js.erb"
     end
