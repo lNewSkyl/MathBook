@@ -4,6 +4,16 @@
   <p class=text-muted align="right">Last seen: never.</p>
 <% end %>
 
+<p class="text-secondary mb-1">
+  <% if @user.solutions.any? %>
+     <%= t('users.number_of_solutions') %>: <%= solutions_count @user %>
+  <% end %>
+</p>
+<p class="text-muted font-size-sm">
+  <%= t('users.number_of_created_articles') %>: <%= all_articles_count @user %>   
+</p> 
+
+
 
 <div style="text-align: center;">
   <%if @user.avatar.attached? %>
@@ -25,7 +35,7 @@
 
 
 <% if @user.articles.any? %>
-  <h3>User tasks (<%= @user.articles.count %>)</h3>
+  <h3>User tasks: <%= @user.articles.count %></h3>
   <br>
   <div class="flickr_pagination">
     <%= will_paginate @articles %>

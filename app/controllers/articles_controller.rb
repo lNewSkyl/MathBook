@@ -12,15 +12,6 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
   end
-
-  def complete
-    if user_signed_in?
-      @article = Article.find(params[:id])
-      @article.upvote_by current_user
-      
-      render "vote.js.erb"
-    end
-  end
     
 
 
@@ -40,9 +31,7 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @article = Article.new(article_params)
-    @article.user_id = current_user.id
-
+    @article = current_user.articles.new(article_params)
     if @article.save
       redirect_to @article
     else

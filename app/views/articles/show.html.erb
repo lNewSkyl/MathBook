@@ -39,11 +39,23 @@
   <%= image_tag image, width:"400px" %>
   <% end %>
 <% end %>
-<% @article.answer %>
+
 <br>
 <% if user_signed_in? %>
-  <%= render partial: 'solutions/form', locals: { article: @article, user: current_user} %>
+  <% if current_user && no_answer?(@article) %> <hr><br> 
+    <%= render partial: 'solutions/form', locals: { article: @article, user: current_user} %>
+  <% else %>
+    <div class="d-grid gap-2">
+      <a class="btn btn-success btn-lg disabled" role="button" aria-disabled="true">Task solved!!!</a>
+    </div>
+  <% end %>
 <% end %>
+<br>
+
+
+
+
+
 </p>
 <hr/>
   <div class="row row-cols-auto">

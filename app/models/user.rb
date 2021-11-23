@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable, :lockable, :omniauthable, omniauth_providers: [:github, :google_oauth2]
 
-  has_many :solutions
+  has_many :solutions, dependent: :destroy
   has_many :articles, dependent: :destroy
   has_one_attached :avatar, dependent: :destroy
   after_commit :add_default_avatar, on: %i[create update]

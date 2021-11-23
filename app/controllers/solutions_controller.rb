@@ -8,6 +8,7 @@ class SolutionsController < ApplicationController
 			redirect_to article_path(params[:article_id])
 			flash[:notice] = "Correct! You are awesome"
 			if !@solution.save
+				current_user.solutions.create! article_id: @article.id
 				flash[:notice] = @solution.errors.full_messages.to_sentence
 			end
 		else

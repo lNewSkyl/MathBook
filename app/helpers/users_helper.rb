@@ -6,4 +6,13 @@ module UsersHelper
 			'Ban'
 		end
 	end
+
+    def solutions_count(user)
+        user.solutions.count
+    end
+
+ 	def all_articles_count(user)
+		user.articles.count
+ 	end
+
 end
