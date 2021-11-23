@@ -1,19 +1,17 @@
-<% unless @user.last_sign_in_at.nil? %>
-  <p class=text-muted align="right">Last seen: <%= time_ago_in_words(@user.last_sign_in_at) %> ago.</p>
-<% else %>
-  <p class=text-muted align="right">Last seen: never.</p>
-<% end %>
-
-<p class="text-secondary mb-1">
-  <% if @user.solutions.any? %>
-     <%= t('users.number_of_solutions') %>: <%= solutions_count @user %>
-  <% end %>
-</p>
-<p class="text-muted font-size-sm">
-  <%= t('users.number_of_created_articles') %>: <%= all_articles_count @user %>   
-</p> 
-
-
+<div class="row">
+  <div class="col">
+    <% if @user.solutions.any? %>
+       <p class=text-muted align="left"><%= t('users.number_of_solved_tasks') %>: <%= solutions_count @user %></p>
+    <% end %>
+  </div>
+  <div class="col">
+    <% unless @user.last_sign_in_at.nil? %>
+      <p class=text-muted align="right">Last seen: <%= time_ago_in_words(@user.last_sign_in_at) %> ago.</p>
+    <% else %>
+      <p class=text-muted align="right">Last seen: never.</p>
+    <% end %>
+  </div>
+</div>
 
 <div style="text-align: center;">
   <%if @user.avatar.attached? %>
@@ -33,10 +31,8 @@
   <% end %>
 </div>
 
-
 <% if @user.articles.any? %>
   <h3>User tasks: <%= @user.articles.count %></h3>
-  <br>
   <div class="flickr_pagination">
     <%= will_paginate @articles %>
   </div>
