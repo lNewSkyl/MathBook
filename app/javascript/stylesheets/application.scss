@@ -1,7 +1,5 @@
 @import "./actiontext.scss";
 
-body { background-color: White; }
-
 
 .digg_pagination {
   background: white;
@@ -115,4 +113,49 @@ body { background-color: White; }
 
 
 
+$dark-background-color-base : #0d1117;
+
+
+body { 
+  background-color: White; 
+}
+
+body.light {
+  color: black;
+  background-color: white;
+
+  .card{
+  background-color: Snow;
+  }
+
+
+  .card-body{
+  background-color: Snow;
+  }
+}
+
+body.dark {
+  color: white;
+  background-color: $dark-background-color-base;
+
+  .card{
+  color: White;
+  background-color: Black;
+  }
+
+  .card-header{
+  color: Black;
+  background-color: DarkGrey;
+  }
+
+  .card-body{
+  color: Black;
+  background-color: DarkGrey;
+  }
+
+  .table{
+  color: White;
+  }
+
+}
 
