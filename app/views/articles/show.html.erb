@@ -1,12 +1,12 @@
-  <% if user_signed_in? %>
-   <% if @article.user.email == current_user.email || current_user.email == "atom-1121@mail.ru" %>
-      <div class="btn-group container" role="group" aria-label="Basic mixed styles example">
-      <a href="<%= edit_article_path(@article) %>" class="btn btn-outline-success" role="button">Edit task</a>
-      <a class="btn btn-danger" <%= link_to "Delete task", article_path(@article),
-                      method: :delete,
-                      data: { confirm: "Are you sure?" } %></a></div>
-   <% end %>
-  <% end %>  
+<% if user_signed_in? %>
+ <% if @article.user.email == current_user.email || current_user.email == "atom-1121@mail.ru" %>
+    <div class="btn-group container" role="group" aria-label="Basic mixed styles example">
+    <a href="<%= edit_article_path(@article) %>" class="btn btn-outline-success" role="button">Edit task</a>
+    <a class="btn btn-danger" <%= link_to "Delete task", article_path(@article),
+                    method: :delete,
+                    data: { confirm: "Are you sure?" } %></a></div>
+ <% end %>
+<% end %>  
 <br><br>
 <div class="container">
   <div class="row">
@@ -25,8 +25,8 @@
     <div class="col">
       <style>.raz {text-align: right;}</style>
       <div class = raz>
-      <p class=text-muted>Created: <%= time_ago_in_words(@article.created_at) %> ago.<br>by <strong><%= link_to @article.user.username, @article.user %> </strong></p>
-    </div>
+        <p class=text-muted>Created: <%= time_ago_in_words(@article.created_at) %> ago.<br>by <strong><%= link_to @article.user.username, @article.user %> </strong></p>
+      </div>
     </div>
   </div>
 </div>

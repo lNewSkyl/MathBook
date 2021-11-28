@@ -1,4 +1,4 @@
-<% provide(:title, 'All users') %>
+<%= provide(:title, 'All users') %>
 
 
 <% if user_signed_in? %>
@@ -21,7 +21,7 @@
 	    </tr>
 	  </thead>
 	  <tbody>
-	<% @users.each_with_index do |user, index| %>
+	<% @users.sort.each_with_index do |user, index| %>
 	    <tr>
 	      <th class="align-middle" scope="row"><%= user.id %></th>
 	      <td class="align-middle"><%= link_to user.username, user %></td>
