@@ -82,15 +82,6 @@ ActiveRecord::Schema.define(version: 2021_11_23_210436) do
 
   create_table "solutions", force: :cascade do |t|
     t.text "content", null: false
-    t.bigint "article_id", null: false
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["article_id"], name: "index_solutions_on_article_id"
-    t.index ["user_id"], name: "index_solutions_on_user_id"
-  end
-
-  create_table "solved_articles", force: :cascade do |t|
     t.integer "user_id"
     t.integer "article_id"
     t.datetime "created_at", precision: 6, null: false
@@ -137,6 +128,4 @@ ActiveRecord::Schema.define(version: 2021_11_23_210436) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "articles"
-  add_foreign_key "solutions", "articles"
-  add_foreign_key "solutions", "users"
 end
