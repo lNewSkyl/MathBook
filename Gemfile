@@ -21,7 +21,7 @@ gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 # gem 'sqlite3', '~> 1.4'
 
 
-gem 'mysql2'
+gem 'pg'
 
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
