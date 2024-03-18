@@ -1,26 +1,25 @@
+# frozen_string_literal: true
+
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :destroy, :edit]
-  
+  before_action :authenticate_user!, only: %i[new create destroy edit]
+
   def index
-    @articles = Article.paginate(page: params[:page], per_page:5)
+    @articles = Article.paginate(page: params[:page], per_page: 5)
     @articles_scoped_by_rate = Article.all.order(cached_votes_score: :desc)
-    @articles_pag_rate = @articles_scoped_by_rate.paginate(page: params[:page], per_page:5)
+    @articles_pag_rate = @articles_scoped_by_rate.paginate(page: params[:page], per_page: 5)
     @articles_scoped_by_date = Article.all.order(created_at: :desc)
-    @articles_pag_date = @articles_scoped_by_date.paginate(page: params[:page], per_page:5)
+    @articles_pag_date = @articles_scoped_by_date.paginate(page: params[:page], per_page: 5)
   end
 
   def show
     @article = Article.find(params[:id])
   end
-    
-
 
   def purge_avatar
     @article = Article.find(params[:id])
     @article.avatar.purge
-    redirect_to @article, notice: "Avatar deleted"
+    redirect_to @article, notice: 'Avatar deleted'
   end
-
 
   def new
     if user_signed_in?
@@ -41,13 +40,10 @@ class ArticlesController < ApplicationController
 
   def edit
     @article = Article.find(params[:id])
-    if current_user.email == "atom-1121@mail.ru" || current_user.email  == @article.user.email
-    end
   end
 
   def update
     @article = Article.find(params[:id])
-
     if @article.update(article_params)
       redirect_to @article
     else
@@ -57,48 +53,48 @@ class ArticlesController < ApplicationController
 
   def destroy
     @article = Article.find(params[:id])
-    if current_user.email == "atom-1121@mail.ru" || current_user.email  == @article.user.email
-      @article.destroy
-      redirect_to home_path
-    end
+    return unless current_user.email == 'atom-1121@mail.ru' || current_user.email == @article.user.email
+
+    @article.destroy
+    redirect_to home_path
   end
 
   def downvote
-    if user_signed_in?
-      @article = Article.find(params[:id])
-      if current_user.voted_down_on? @article, vote_scope: 'like'
-        @article.unvote_by current_user, vote_scope: 'like'
-      else 
-        @article.downvote_by current_user, vote_scope: 'like'
-      end
-      render "vote.js.erb"
+    return unless user_signed_in?
+
+    @article = Article.find(params[:id])
+    if current_user.voted_down_on? @article, vote_scope: 'like'
+      @article.unvote_by current_user, vote_scope: 'like'
+    else
+      @article.downvote_by current_user, vote_scope: 'like'
     end
+    render 'vote.js.erb'
   end
 
   def upvote
-    if user_signed_in?
-      @article = Article.find(params[:id])
-      if current_user.voted_up_on? @article, vote_scope: 'like'
-        @article.unvote_by current_user, vote_scope: 'like'
-      else 
-        @article.upvote_by current_user, vote_scope: 'like'
-      end
-      render "vote.js.erb"
+    return unless user_signed_in?
+
+    @article = Article.find(params[:id])
+    if current_user.voted_up_on? @article, vote_scope: 'like'
+      @article.unvote_by current_user, vote_scope: 'like'
+    else
+      @article.upvote_by current_user, vote_scope: 'like'
     end
+    render 'vote.js.erb'
   end
 
   def search
-    @articles = Article.where("title LIKE ?","%" + params[:q] + "%")
+    @articles = Article.where('title LIKE ?', "%#{params[:q]}%")
   end
 
-
   private
-    def article_params
-      params.require(:article).permit(:title, :body, :description, :answer, :status, :avatar, images: [])
-    end
 
-    def correct_user
-      @article = current_user.articles.find_by(id: params[:id])
-      redirect_to home_path if @article.nil?
-    end
+  def article_params
+    params.require(:article).permit(:title, :body, :description, :answer, :status, :avatar, images: [])
+  end
+
+  def correct_user
+    @article = current_user.articles.find_by(id: params[:id])
+    redirect_to home_path if @article.nil?
+  end
 end

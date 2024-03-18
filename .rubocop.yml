@@ -1,0 +1,17 @@
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+  Exclude:
+    - 'db/schema.rb'
+    - 'bin/**/*'
+    - 'config/puma.rb'
+    - 'config/environment.rb'
+    - 'config/importmap.rb'
+    - 'config/boot.rb'
+    - 'config/application.rb'
+    - 'config/initializers/*'
+    - 'config/environments/*'
+    - 'config/spring.rb'
+
+Style/Documentation:
+  Enabled: false
