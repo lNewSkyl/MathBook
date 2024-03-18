@@ -1,5 +1,6 @@
-class Article < ApplicationRecord
+# frozen_string_literal: true
 
+class Article < ApplicationRecord
   belongs_to :user
   has_one_attached :avatar
   has_many_attached :images
@@ -7,7 +8,7 @@ class Article < ApplicationRecord
   has_rich_text :body
   acts_as_votable
   has_many :solutions, dependent: :destroy
-  
+
   validates :user_id, presence: true
   validates :title, presence: true
   validates :description, presence: true

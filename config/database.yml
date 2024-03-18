@@ -10,8 +10,8 @@ default: &default
   encoding: unicode
   timeout: 5000
   host: 127.0.0.1
-  password:
-  username: 
+  password: <%= ENV.fetch("DB_PASSWORD") %>
+  username: <%= ENV.fetch("DB_USERNAME") %>
 
 development:
   <<: *default

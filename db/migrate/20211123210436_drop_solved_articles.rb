@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DropSolvedArticles < ActiveRecord::Migration[6.1]
   def change
     drop_table :solved_articles do |t|
